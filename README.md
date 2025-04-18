@@ -1,8 +1,9 @@
 # Template Overview
 
-A FBI Wanted Dashboard  [Live](https://fbi-wanted-chi.vercel.app/login)
+A FBI Wanted Dashboard  [Live](https://fbi-wanted-chi.vercel.app)
 
-![Screenshot](https://github.com/danielh4t/fbi/blob/main/public/screenshot.png)
+![Login](https://github.com/danielh4t/fbi/blob/main/public/login.png)
+![Dashboard](https://github.com/danielh4t/fbi/blob/main/public/dashboard.png)
 
 
 ## Prerequisites

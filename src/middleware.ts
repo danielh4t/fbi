@@ -25,7 +25,7 @@ export async function middleware(request: NextRequest)
  }
 
   // Allow authenticated users
-   return NextResponse.next()
+   return NextResponse.redirect(new URL("/dashboard"))
 }
 
 // Protect all routes except /login and /api/auth
