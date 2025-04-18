@@ -1,4 +1,4 @@
-import { LoginForm } from "@/components/ui/login-form"
+import { UserSignIn } from "@/components/ui/UserSignIn"
 import { RiContrast2Line } from "@remixicon/react"
 
 export default async function LoginPage() {
@@ -41,7 +41,7 @@ export default async function LoginPage() {
         <h1 className="mt-4 text-center text-xl font-semibold text-gray-900 dark:text-gray-50">
           Sign in to Wanted
         </h1>
-        <LoginForm />
+        <UserSignIn />
       </div>
     </div>
   )

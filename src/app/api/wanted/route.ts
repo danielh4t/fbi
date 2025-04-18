@@ -52,7 +52,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       const json = await res.json()
       const rawItems = Array.isArray(json.items) ? json.items : []
       // Transform and add page to each record
-      const records = rawItems.map((item) => {
+      const records = rawItems.map((item: any) => {
         const rec = transform(item)
         return { ...rec, page }
       })
@@ -60,7 +60,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       const pagesCount = Math.ceil(total / limit)
       // Cache each record individually
       await Promise.all(
-        records.map((rec) =>
+        records.map((rec: any) =>
           redisClient.set(
             `wanted:item:${rec.id}`,
             JSON.stringify(rec),
@@ -123,7 +123,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     }
     const json = await res.json()
     const rawItems = Array.isArray(json.items) ? json.items : []
-    const records = rawItems.map((item) => {
+    const records = rawItems.map((item: any) => {
       const rec = transform(item)
       return { ...rec, page }
     })
@@ -131,7 +131,7 @@ export async function GET(request: Request): Promise<NextResponse> {
     const pagesCount = Math.ceil(total / limit)
     // cache each item
     await Promise.all(
-      records.map((rec) =>
+      records.map((rec: any) =>
         redisClient.set(
           `wanted:item:${rec.id}`,
           JSON.stringify(rec),
@@ -140,7 +140,7 @@ export async function GET(request: Request): Promise<NextResponse> {
       )
     )
     // cache page mapping (ids + metadata)
-    const ids = records.map((rec) => rec.id)
+    const ids = records.map((rec: any) => rec.id)
     const pageInfo = { ids, total, pages: pagesCount, limit }
     await redisClient.set(pageKey, JSON.stringify(pageInfo), { EX: 60 * 5 })
     return NextResponse.json({ data: records, total, page, pages: pagesCount, limit })

@@ -24,13 +24,19 @@ A FBI Wanted Dashboard  [Live](https://wanted.stacq.app)
 
 3. **Set up environment variables:**
 
-   Create a `.env.local` file in the root with:
+   Create a `.env.local` file in the root (you can copy from `.env.example`) and fill in:
 
-   ```
+   ```bash
+   # GitHub OAuth
    GITHUB_ID=your_github_client_id
    GITHUB_SECRET=your_github_client_secret
+
+   # NextAuth
    NEXTAUTH_SECRET=your_random_secret
    NEXTAUTH_URL=http://localhost:3000
+
+   # Redis cache (defaults to localhost if not set)
+   REDIS_URL=redis://localhost:6379
    ```
 
 4. **Run the development server:**

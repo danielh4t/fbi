@@ -3,7 +3,7 @@
 import { signIn } from "next-auth/react";
 import { Button } from "@/components/Button";
 
-export function LoginForm() {
+export function UserSignIn() {
   const handleSignIn = () => {
     signIn("github");
   };

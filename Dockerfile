@@ -27,7 +27,7 @@ WORKDIR /app
 ENV NODE_ENV=production
 
 # If you use Next.js image optimization, install sharp
-RUN apk add --no-cache libc6-compat
+RUN apk add --no-cache libc6-compat redis
 
 COPY --from=builder /app/public ./public
 COPY --from=builder /app/.next ./.next
@@ -37,4 +37,5 @@ COPY --from=builder /app/next.config.* ./ # for .js, .ts, .mjs
 
 EXPOSE 3000
 
-CMD ["pnpm", "start"]
+# Start both Redis and your app
+CMD redis-server --daemonize yes && pnpm start
