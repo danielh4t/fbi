@@ -7,10 +7,7 @@ export async function middleware(request: NextRequest)
   const { pathname } = request.nextUrl
 
   // Allow unauthenticated access to /login and /api/auth
-  if (
-    pathname.startsWith("/login") ||
-    pathname.startsWith("/api/auth")
-  )
+  if (pathname.startsWith("/login") || pathname.startsWith("/api/auth"))
   {
     return NextResponse.next()
   }
@@ -19,13 +16,19 @@ export async function middleware(request: NextRequest)
   const token = await getToken({ req: request, secret: process.env.NEXTAUTH_SECRET })
   if (!token)
   {
-   // Redirect unauthenticated users to /login
+    // Redirect unauthenticated users to /login
     const loginUrl = new URL("/login", request.url)
     return NextResponse.redirect(loginUrl)
- }
+  }
 
-  // Allow authenticated users
-   return NextResponse.redirect(new URL("/dashboard"))
+  // If authenticated and not already on /dashboard, redirect to /dashboard
+  if (pathname !== "/dashboard")
+  {
+    return NextResponse.redirect(new URL("/dashboard", request.url))
+  }
+
+  // Allow authenticated users on /dashboard
+  return NextResponse.next()
 }
 
 // Protect all routes except /login and /api/auth
