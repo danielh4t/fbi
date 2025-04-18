@@ -9,7 +9,8 @@ RUN corepack enable && corepack prepare pnpm@9.1.1 --activate
 
 # 4. Copy package files and install dependencies
 COPY package.json pnpm-lock.yaml ./
-RUN pnpm install --frozen-lockfile
+RUN pnpm install
+
 
 # 5. Copy the rest of the app
 FROM node:20-alpine AS builder
@@ -38,4 +39,4 @@ COPY --from=builder /app/next.config.* ./ # for .js, .ts, .mjs
 EXPOSE 3000
 
 # Start both Redis and your app
-CMD redis-server --daemonize yes && pnpm start
+CMD ["sh", "-c", "redis-server --daemonize yes && pnpm start"]
