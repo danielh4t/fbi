@@ -1,5 +1,5 @@
-import NextAuth from "next-auth"
 import type { NextAuthOptions } from "next-auth"
+import NextAuth from "next-auth"
 import GitHubProvider from "next-auth/providers/github"
 
 // Options for NextAuth
@@ -13,6 +13,13 @@ export const authOptions: NextAuthOptions = {
       clientSecret: process.env.GITHUB_SECRET!,
     }),
   ],
+  callbacks: {
+    async redirect({ baseUrl })
+    {
+      // Always redirect to dashboard after sign-in
+      return `${baseUrl}/dashboard`
+    },
+  },
 }
 
 // NextAuth handler
